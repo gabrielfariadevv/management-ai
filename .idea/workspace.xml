@@ -5,16 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="650d4176-9056-40e8-9ff8-e63aadfd08f8" name="Changes" comment="Styles Changes">
-      <change afterPath="$PROJECT_DIR$/management/src/main/java/com/student/management/config/OpenAIConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/java/com/student/management/dto/ExerciseRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management/src/main/java/com/student/management/service/ExerciseGeneratorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/management/src/main/java/com/student/management/controller/SessionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/management/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/management/src/main/java/com/student/management/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/student/management/config/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/java/com/student/management/controller/ExerciseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/java/com/student/management/controller/ExerciseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/management/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

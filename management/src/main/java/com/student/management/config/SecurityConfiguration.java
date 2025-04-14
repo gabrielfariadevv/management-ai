@@ -35,22 +35,26 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/signup",
+                                "/login",
+                                "/session",
                                 "/routine/**",
-                                "/api/exercises/generate", // endpoint público
-                                "/login" // deixa login acessível
+                                "/api/exercises/generate"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
-                // Desabilita redirecionamento para páginas de login
-                .httpBasic(httpBasic -> {}) // usa basic auth para testes no Postman
-                .formLogin(form -> form.disable()) // desativa o formLogin com redirecionamentos
+                .formLogin(form -> form.disable())
+                .httpBasic(httpBasic -> {}) // Para testes no Postman (pode remover se for só com sessão)
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessHandler((request, response, authentication) ->
                                 response.setStatus(HttpServletResponse.SC_OK))
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
+                )
+                .sessionManagement(session -> session
+                        .maximumSessions(1) // Limita a uma sessão por usuário (opcional)
                 );
+
         return http.build();
     }
 
