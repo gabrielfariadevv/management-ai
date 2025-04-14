@@ -1,9 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Importando o useNavigate
+import { useNavigate } from "react-router-dom";
 import "../styles/Profile.css";
 
 export default function Profile() {
-  const navigate = useNavigate(); // Usando o hook de navegação
+  const navigate = useNavigate();
 
   return (
     <div className="wrapper">

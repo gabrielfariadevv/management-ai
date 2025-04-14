@@ -31,43 +31,39 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable())  // Desabilita CSRF para facilitar testes
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/signup", "/routine/**").permitAll()  // Permite acesso sem autenticação a esses endpoints
-                        .anyRequest().authenticated()  // Exige autenticação para qualquer outro endpoint
+                        .requestMatchers(
+                                "/signup",
+                                "/routine/**",
+                                "/api/exercises/generate", // endpoint público
+                                "/login" // deixa login acessível
+                        ).permitAll()
+                        .anyRequest().authenticated()
                 )
-                .formLogin(form -> form
-                        .loginPage("/login")  // Configuração para a página de login personalizada, se necessário
-                        .loginProcessingUrl("/login")  // URL para o processo de login
-                        .permitAll()  // Permite o acesso ao login sem autenticação
-                        .successHandler((request, response, authentication) ->
-                                response.setStatus(HttpServletResponse.SC_OK)  // Sucesso no login
-                        )
-                        .failureHandler((request, response, exception) ->
-                                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED)  // Falha no login
-                        )
-                )
+                // Desabilita redirecionamento para páginas de login
+                .httpBasic(httpBasic -> {}) // usa basic auth para testes no Postman
+                .formLogin(form -> form.disable()) // desativa o formLogin com redirecionamentos
                 .logout(logout -> logout
-                        .logoutUrl("/logout")  // URL para o logout
+                        .logoutUrl("/logout")
                         .logoutSuccessHandler((request, response, authentication) ->
-                                response.setStatus(HttpServletResponse.SC_OK)  // Sucesso no logout
-                        )
-                        .invalidateHttpSession(true)  // Invalida a sessão
-                        .deleteCookies("JSESSIONID")  // Exclui o cookie de sessão
+                                response.setStatus(HttpServletResponse.SC_OK))
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
                 );
         return http.build();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();  // Criptografa senhas com BCrypt
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .userDetailsService(customUserDetailsService)  // Serviço de detalhes de usuário
-                .passwordEncoder(passwordEncoder())  // Codificador de senha
+                .userDetailsService(customUserDetailsService)
+                .passwordEncoder(passwordEncoder())
                 .and()
                 .build();
     }
@@ -75,13 +71,13 @@ public class SecurityConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));  // Permite acesso do frontend React
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));  // Permite os métodos HTTP necessários
-        configuration.setAllowedHeaders(Arrays.asList("*"));  // Permite todos os cabeçalhos
-        configuration.setAllowCredentials(true);  // Permite o uso de credenciais
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);  // Configura o CORS para todos os endpoints
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 }
