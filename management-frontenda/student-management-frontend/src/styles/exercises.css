@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+.wrapper {
+  min-height: 100vh;
+  background: url("https://codingstella.com/wp-content/uploads/2024/01/download-7.jpeg")
+    no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.exercises-container {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  color: #fff;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.exercise-list {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.exercise-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 12px;
+}
+
+.back-button {
+  display: block;
+  margin: 0 auto;
+  background-color: #ffffff33;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #ffffff55;
+}
